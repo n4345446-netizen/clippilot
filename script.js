@@ -13,7 +13,16 @@ const recentActivity = document.getElementById("recentActivity");
 let selectedVideo = null;
 let videoPreviewUrl = null;
 
-// Create the video preview area
+// Remember the original position of Start Clipping
+const startButtonParent = startButton
+  ? startButton.parentNode
+  : null;
+
+const startButtonNextSibling = startButton
+  ? startButton.nextSibling
+  : null;
+
+// Create video preview area
 const previewContainer = document.createElement("div");
 previewContainer.id = "videoPreview";
 previewContainer.style.display = "none";
@@ -26,7 +35,24 @@ if (importMessage && importMessage.parentNode) {
   );
 }
 
-// Mobile navigation menu
+// Restore Start Clipping to its original position
+function restoreStartButton() {
+  if (!startButton || !startButtonParent) return;
+
+  if (
+    startButtonNextSibling &&
+    startButtonNextSibling.parentNode === startButtonParent
+  ) {
+    startButtonParent.insertBefore(
+      startButton,
+      startButtonNextSibling
+    );
+  } else {
+    startButtonParent.appendChild(startButton);
+  }
+}
+
+// Mobile navigation
 if (menuButton && sidebar) {
   menuButton.addEventListener("click", () => {
     sidebar.classList.toggle("open");
@@ -48,7 +74,7 @@ document.querySelectorAll(".nav-link").forEach((link) => {
   });
 });
 
-// Clear the previous preview
+// Clear video preview
 function clearVideoPreview() {
   previewContainer.replaceChildren();
   previewContainer.style.display = "none";
@@ -59,9 +85,10 @@ function clearVideoPreview() {
   }
 
   selectedVideo = null;
+  restoreStartButton();
 }
 
-// Display a selected video
+// Display selected video
 function showVideoPreview(file) {
   clearVideoPreview();
 
@@ -108,7 +135,8 @@ function showVideoPreview(file) {
     }
 
     if (importMessage) {
-      importMessage.textContent = "Video removed. Choose another video.";
+      importMessage.textContent =
+        "Video removed. Choose another video.";
     }
   });
 
@@ -118,6 +146,11 @@ function showVideoPreview(file) {
     fileName,
     removeButton
   );
+
+  // Move Start Clipping below Remove video
+  if (startButton) {
+    previewContainer.appendChild(startButton);
+  }
 
   previewContainer.style.display = "block";
 }
@@ -205,10 +238,9 @@ if (scheduledMessage) {
     "No posts scheduled yet. Scheduling will be added in a later development stage.";
 }
 
-// Release preview memory when leaving the page
+// Release preview memory
 window.addEventListener("beforeunload", () => {
   if (videoPreviewUrl) {
     URL.revokeObjectURL(videoPreviewUrl);
   }
 });
-    
