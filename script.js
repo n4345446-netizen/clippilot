@@ -8,12 +8,10 @@ const videoFile = document.getElementById("videoFile");
 const videoUrl = document.getElementById("videoUrl");
 const importMessage = document.getElementById("importMessage");
 const facebookMessage = document.getElementById("facebookMessage");
-const recentActivity = document.getElementById("recentActivity");
 
 let selectedVideo = null;
 let videoPreviewUrl = null;
 
-// Remember the original position of Start Clipping
 const startButtonParent = startButton
   ? startButton.parentNode
   : null;
@@ -22,7 +20,7 @@ const startButtonNextSibling = startButton
   ? startButton.nextSibling
   : null;
 
-// Create video preview area
+// Preview container
 const previewContainer = document.createElement("div");
 previewContainer.id = "videoPreview";
 previewContainer.style.display = "none";
@@ -35,7 +33,7 @@ if (importMessage && importMessage.parentNode) {
   );
 }
 
-// Restore Start Clipping to its original position
+// Restore Start Clipping
 function restoreStartButton() {
   if (!startButton || !startButtonParent) return;
 
@@ -74,7 +72,39 @@ document.querySelectorAll(".nav-link").forEach((link) => {
   });
 });
 
-// Clear video preview
+// Format video duration
+function formatDuration(seconds) {
+  if (!Number.isFinite(seconds)) return "Unavailable";
+
+  const total = Math.floor(seconds);
+  const hours = Math.floor(total / 3600);
+  const minutes = Math.floor((total % 3600) / 60);
+  const remainingSeconds = total % 60;
+
+  if (hours > 0) {
+    return (
+      hours + ":" +
+      String(minutes).padStart(2, "0") + ":" +
+      String(remainingSeconds).padStart(2, "0")
+    );
+  }
+
+  return (
+    minutes + ":" +
+    String(remainingSeconds).padStart(2, "0")
+  );
+}
+
+// Format file size
+function formatFileSize(bytes) {
+  if (bytes < 1024 * 1024) {
+    return (bytes / 1024).toFixed(1) + " KB";
+  }
+
+  return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+}
+
+// Clear previous preview
 function clearVideoPreview() {
   previewContainer.replaceChildren();
   previewContainer.style.display = "none";
@@ -88,7 +118,66 @@ function clearVideoPreview() {
   restoreStartButton();
 }
 
-// Display selected video
+// Display video information
+function displayVideoInformation(video, file) {
+  const information = document.createElement("div");
+
+  information.style.marginTop = "14px";
+  information.style.padding = "14px";
+  information.style.background = "#f3f7fc";
+  information.style.borderRadius = "10px";
+
+  const title = document.createElement("p");
+  title.textContent = "Video Information";
+  title.style.fontWeight = "600";
+  title.style.marginBottom = "10px";
+
+  const details = [
+    ["Duration", "Reading..."],
+    ["Resolution", "Reading..."],
+    ["File size", formatFileSize(file.size)],
+    ["Format", file.type || "Unknown"]
+  ];
+
+  const values = {};
+
+  details.forEach(([label, value]) => {
+    const line = document.createElement("p");
+
+    line.style.fontSize = "13px";
+    line.style.margin = "7px 0";
+
+    const labelText = document.createElement("strong");
+    labelText.textContent = label + ": ";
+
+    const valueText = document.createElement("span");
+    valueText.textContent = value;
+
+    line.append(labelText, valueText);
+    information.appendChild(line);
+
+    values[label] = valueText;
+  });
+
+  information.prepend(title);
+
+  video.addEventListener("loadedmetadata", () => {
+    values["Duration"].textContent =
+      formatDuration(video.duration);
+
+    values["Resolution"].textContent =
+      video.videoWidth + " × " + video.videoHeight;
+  }, { once: true });
+
+  video.addEventListener("error", () => {
+    values["Duration"].textContent = "Could not read";
+    values["Resolution"].textContent = "Could not read";
+  }, { once: true });
+
+  previewContainer.appendChild(information);
+}
+
+// Show video preview
 function showVideoPreview(file) {
   clearVideoPreview();
 
@@ -96,7 +185,7 @@ function showVideoPreview(file) {
   videoPreviewUrl = URL.createObjectURL(file);
 
   const heading = document.createElement("p");
-  heading.textContent = "Video preview";
+  heading.textContent = "Video Preview";
   heading.style.fontWeight = "600";
   heading.style.marginBottom = "8px";
 
@@ -117,10 +206,14 @@ function showVideoPreview(file) {
   fileName.style.marginTop = "8px";
   fileName.style.wordBreak = "break-word";
 
+  previewContainer.append(heading, video, fileName);
+
+  displayVideoInformation(video, file);
+
   const removeButton = document.createElement("button");
   removeButton.type = "button";
   removeButton.textContent = "Remove video";
-  removeButton.style.marginTop = "8px";
+  removeButton.style.marginTop = "12px";
   removeButton.style.padding = "9px 14px";
   removeButton.style.borderRadius = "7px";
   removeButton.style.border = "1px solid #d5dce5";
@@ -140,14 +233,8 @@ function showVideoPreview(file) {
     }
   });
 
-  previewContainer.append(
-    heading,
-    video,
-    fileName,
-    removeButton
-  );
+  previewContainer.appendChild(removeButton);
 
-  // Move Start Clipping below Remove video
   if (startButton) {
     previewContainer.appendChild(startButton);
   }
@@ -177,7 +264,7 @@ if (videoFile && importMessage) {
     showVideoPreview(file);
 
     importMessage.textContent =
-      "Video selected successfully. You can preview it below.";
+      "Video loaded. Reading video information...";
   });
 }
 
@@ -194,7 +281,7 @@ if (startButton && importMessage) {
 
     if (selectedVideo) {
       importMessage.textContent =
-        "Your video is ready. AI clipping will be added in the next development stage.";
+        "Video information extracted successfully. AI highlight detection is the next development stage.";
       return;
     }
 
@@ -215,7 +302,7 @@ if (startButton && importMessage) {
       }
 
       importMessage.textContent =
-        "The link is valid, but importing and processing online videos is not enabled yet.";
+        "The link is valid, but online video importing is not enabled yet.";
     }
   });
 }
