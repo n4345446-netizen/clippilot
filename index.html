@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f8ff">
+  <meta name="description" content="ClipPilot - AI Video Clipping and Automation">
+  <title>ClipPilot | Your Video Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <span class="brand-icon">C</span>
+        <span>ClipPilot</span>
+      </div>
+
+      <nav>
+        <a href="#dashboard" class="nav-link active">Dashboard</a>
+        <a href="#clips" class="nav-link">My Clips</a>
+        <a href="#scheduled" class="nav-link">Scheduled Posts</a>
+        <a href="#facebook" class="nav-link">Facebook Connection</a>
+        <a href="#settings" class="nav-link">Settings</a>
+        <a href="#help" class="nav-link">Help & Guide</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p>ClipPilot Studio</p>
+        <small>Video creation made simpler.</small>
+      </div>
+    </aside>
+
+    <main class="main-content">
+
+      <header class="topbar">
+        <button class="menu-button" id="menuButton" aria-label="Toggle menu">☰</button>
+        <span class="topbar-label">Your workspace</span>
+        <span class="profile">CP</span>
+      </header>
+
+      <section class="welcome" id="dashboard">
+        <div>
+          <p class="eyebrow">VIDEO WORKSPACE</p>
+          <h1>Your Video Studio</h1>
+          <p>Turn your videos into engaging short clips.</p>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <span>Videos processed</span>
+          <strong id="videosCount">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Clips created</span>
+          <strong id="clipsCount">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Facebook page</span>
+          <strong id="facebookStatus">Not connected</strong>
+        </article>
+        <article class="stat-card">
+          <span>Scheduled posts</span>
+          <strong id="postsCount">0</strong>
+        </article>
+      </section>
+
+      <section class="import-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">GET STARTED</p>
+            <h2>Import your video</h2>
+            <p>Paste a supported video link or upload a video file.</p>
+          </div>
+        </div>
+
+        <div class="import-box">
+          <label for="videoUrl">Video link</label>
+          <input
+            type="url"
+            id="videoUrl"
+            placeholder="Paste your video URL here..."
+          >
+
+          <div class="or-divider"><span>OR</span></div>
+
+          <label for="videoFile">Upload a video</label>
+          <input
+            type="file"
+            id="videoFile"
+            accept="video/*"
+          >
+
+          <button id="startButton" class="primary-button">
+            Start Clipping
+          </button>
+
+          <p id="importMessage" class="status-message">
+            Your video will be prepared for processing.
+          </p>
+        </div>
+      </section>
+
+      <section class="features-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">TOOLS</p>
+            <h2>What ClipPilot does</h2>
+          </div>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card">
+            <h3>AI-Powered Clipping</h3>
+            <p>Find interesting moments in longer videos.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3>Automatic Captions</h3>
+            <p>Add readable captions to your short clips.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3>Smart Resizing</h3>
+            <p>Prepare videos for vertical social media formats.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3>Auto Publishing</h3>
+            <p>Connect a Facebook Page for publishing.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel" id="clips">
+          <h2>Recent Activity</h2>
+          <p id="recentActivity">No videos processed yet.</p>
+        </article>
+
+        <article class="panel" id="facebook">
+          <h2>Facebook Connection</h2>
+          <p>Connect your Facebook Page to prepare for publishing.</p>
+          <button class="secondary-button" id="connectFacebook">
+            Connect Facebook
+          </button>
+          <p id="facebookMessage" class="status-message">
+            Facebook is not connected.
+          </p>
+        </article>
+      </section>
+
+      <section class="panel lower-panel" id="scheduled">
+        <h2>Scheduled Posts</h2>
+        <p id="scheduledMessage">You have no scheduled posts.</p>
+      </section>
+
+      <footer id="help">
+        <p>ClipPilot © 2026</p>
+        <p>Make more from every video.</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+  </html>
