@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,162 +11,304 @@
 </head>
 <body>
 
-  <div class="app">
+<div class="app">
 
-    <aside class="sidebar" id="sidebar">
-      <div class="brand">
-        <span class="brand-icon">C</span>
-        <span>ClipPilot</span>
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+      <span class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="6" cy="6" r="3"/>
+          <circle cx="6" cy="18" r="3"/>
+          <path d="M20 4 8.2 15.8M14.5 14.5 20 20M8.2 8.2 12 12"/>
+        </svg>
+      </span>
+      <span>ClipPilot</span>
+    </div>
+
+    <p class="nav-heading">WORKSPACE</p>
+
+    <nav>
+      <a href="#dashboard" class="nav-link active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="3" y="3" width="8" height="8" rx="2"/>
+          <rect x="13" y="3" width="8" height="5" rx="2"/>
+          <rect x="13" y="10" width="8" height="11" rx="2"/>
+          <rect x="3" y="13" width="8" height="8" rx="2"/>
+        </svg>
+        Dashboard
+      </a>
+
+      <a href="#clips" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="3" y="5" width="18" height="14" rx="3"/>
+          <path d="m10 9 5 3-5 3z"/>
+        </svg>
+        My Clips
+      </a>
+
+      <a href="#scheduled" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="3" y="5" width="18" height="16" rx="2"/>
+          <path d="M16 3v4M8 3v4M3 10h18M8 14h3"/>
+        </svg>
+        Scheduled Posts
+      </a>
+
+      <a href="#facebook" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M14 8h-2a2 2 0 0 0-2 2v8m-2-5h6"/>
+        </svg>
+        Facebook Connection
+      </a>
+
+      <p class="nav-heading">PREFERENCES</p>
+
+      <a href="#settings" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.6a8 8 0 0 1-1.6.9l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.6-.9l-1.7.6-1.4-2.4 1.4-1.1a8 8 0 0 1 0-1.9l-1.4-1.1 1.4-2.4 1.7.6a8 8 0 0 1 1.6-.9l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.6.9l1.7-.6 1.4 2.4-1.4 1.1a8 8 0 0 1 0 1.9Z"/>
+        </svg>
+        Settings
+      </a>
+
+      <a href="#help" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M9.6 9a2.5 2.5 0 1 1 4.5 1.5c-.9 1-2.1 1.3-2.1 3M12 17h.01"/>
+        </svg>
+        Help & Guide
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p>ClipPilot Studio</p>
+      <small>Your video workspace</small>
+    </div>
+
+  </aside>
+
+  <main class="main-content">
+
+    <header class="topbar">
+      <button class="menu-button" id="menuButton" aria-label="Toggle menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+      <span class="topbar-label">Workspace / Dashboard</span>
+      <span class="profile">CP</span>
+    </header>
+
+    <section class="welcome" id="dashboard">
+      <div>
+        <p class="eyebrow">VIDEO WORKSPACE</p>
+        <h1>Your Video Studio</h1>
+        <p>Turn longer videos into engaging short-form content.</p>
       </div>
+    </section>
 
-      <nav>
-        <a href="#dashboard" class="nav-link active">Dashboard</a>
-        <a href="#clips" class="nav-link">My Clips</a>
-        <a href="#scheduled" class="nav-link">Scheduled Posts</a>
-        <a href="#facebook" class="nav-link">Facebook Connection</a>
-        <a href="#settings" class="nav-link">Settings</a>
-        <a href="#help" class="nav-link">Help & Guide</a>
-      </nav>
+    <section class="stats-grid">
 
-      <div class="sidebar-footer">
-        <p>ClipPilot Studio</p>
-        <small>Video creation made simpler.</small>
-      </div>
-    </aside>
+      <article class="stat-card">
+        <div class="stat-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="5" width="18" height="14" rx="3"/>
+            <path d="m10 9 5 3-5 3z"/>
+          </svg>
+        </div>
+        <span>Videos processed</span>
+        <strong id="videosCount">0</strong>
+      </article>
 
-    <main class="main-content">
+      <article class="stat-card">
+        <div class="stat-icon purple">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M4 7h16M4 12h10M4 17h7"/>
+            <path d="m17 14 3 3-3 3"/>
+          </svg>
+        </div>
+        <span>Clips created</span>
+        <strong id="clipsCount">0</strong>
+      </article>
 
-      <header class="topbar">
-        <button class="menu-button" id="menuButton" aria-label="Toggle menu">☰</button>
-        <span class="topbar-label">Your workspace</span>
-        <span class="profile">CP</span>
-      </header>
+      <article class="stat-card">
+        <div class="stat-icon green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M14 8h-2a2 2 0 0 0-2 2v8m-2-5h6"/>
+          </svg>
+        </div>
+        <span>Facebook page</span>
+        <strong id="facebookStatus">Not connected</strong>
+      </article>
 
-      <section class="welcome" id="dashboard">
+      <article class="stat-card">
+        <div class="stat-icon orange">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="5" width="18" height="16" rx="2"/>
+            <path d="M16 3v4M8 3v4M3 10h18"/>
+          </svg>
+        </div>
+        <span>Scheduled posts</span>
+        <strong id="postsCount">0</strong>
+      </article>
+
+    </section>
+
+    <section class="import-section">
+
+      <div class="section-heading">
         <div>
-          <p class="eyebrow">VIDEO WORKSPACE</p>
-          <h1>Your Video Studio</h1>
-          <p>Turn your videos into engaging short clips.</p>
+          <p class="eyebrow">GET STARTED</p>
+          <h2>Import your video</h2>
+          <p>Upload a video or paste a supported video link.</p>
         </div>
-      </section>
+      </div>
 
-      <section class="stats-grid">
-        <article class="stat-card">
-          <span>Videos processed</span>
-          <strong id="videosCount">0</strong>
-        </article>
-        <article class="stat-card">
-          <span>Clips created</span>
-          <strong id="clipsCount">0</strong>
-        </article>
-        <article class="stat-card">
-          <span>Facebook page</span>
-          <strong id="facebookStatus">Not connected</strong>
-        </article>
-        <article class="stat-card">
-          <span>Scheduled posts</span>
-          <strong id="postsCount">0</strong>
-        </article>
-      </section>
+      <div class="import-box">
 
-      <section class="import-section">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">GET STARTED</p>
-            <h2>Import your video</h2>
-            <p>Paste a supported video link or upload a video file.</p>
+        <label for="videoUrl">Video link</label>
+
+        <input
+          type="url"
+          id="videoUrl"
+          placeholder="Paste your video URL here..."
+        >
+
+        <div class="or-divider">OR</div>
+
+        <label for="videoFile">Upload a video</label>
+
+        <input
+          type="file"
+          id="videoFile"
+          accept="video/*"
+        >
+
+        <button id="startButton" class="primary-button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m13 2-3 8h7l-6 12 2-9H6l7-11Z"/>
+          </svg>
+          Start Clipping
+        </button>
+
+        <p id="importMessage" class="status-message">
+          Your video will be prepared for processing.
+        </p>
+
+      </div>
+
+    </section>
+
+    <section class="features-section">
+
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">YOUR TOOLS</p>
+          <h2>Everything in one workspace</h2>
+        </div>
+      </div>
+
+      <div class="features-grid">
+
+        <article class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/>
+              <path d="m19 16 .9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9L19 16Z"/>
+            </svg>
           </div>
-        </div>
+          <h3>AI-Powered Clipping</h3>
+          <p>Identify interesting moments from longer videos.</p>
+        </article>
 
-        <div class="import-box">
-          <label for="videoUrl">Video link</label>
-          <input
-            type="url"
-            id="videoUrl"
-            placeholder="Paste your video URL here..."
-          >
-
-          <div class="or-divider"><span>OR</span></div>
-
-          <label for="videoFile">Upload a video</label>
-          <input
-            type="file"
-            id="videoFile"
-            accept="video/*"
-          >
-
-          <button id="startButton" class="primary-button">
-            Start Clipping
-          </button>
-
-          <p id="importMessage" class="status-message">
-            Your video will be prepared for processing.
-          </p>
-        </div>
-      </section>
-
-      <section class="features-section">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">TOOLS</p>
-            <h2>What ClipPilot does</h2>
+        <article class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <path d="M7 9h10M7 13h7M7 17h5"/>
+            </svg>
           </div>
-        </div>
+          <h3>Automatic Captions</h3>
+          <p>Generate readable captions for your clips.</p>
+        </article>
 
-        <div class="features-grid">
-          <article class="feature-card">
-            <h3>AI-Powered Clipping</h3>
-            <p>Find interesting moments in longer videos.</p>
-          </article>
+        <article class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="6" y="2" width="12" height="20" rx="2"/>
+              <path d="M10 5h4M10 19h4"/>
+            </svg>
+          </div>
+          <h3>Smart Resizing</h3>
+          <p>Prepare vertical videos for social platforms.</p>
+        </article>
 
-          <article class="feature-card">
-            <h3>Automatic Captions</h3>
-            <p>Add readable captions to your short clips.</p>
-          </article>
+        <article class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M12 3v12m-4-4 4 4 4-4"/>
+              <path d="M5 17v4h14v-4"/>
+            </svg>
+          </div>
+          <h3>Auto Publishing</h3>
+          <p>Prepare clips for publishing to your Facebook Page.</p>
+        </article>
 
-          <article class="feature-card">
-            <h3>Smart Resizing</h3>
-            <p>Prepare videos for vertical social media formats.</p>
-          </article>
+      </div>
 
-          <article class="feature-card">
-            <h3>Auto Publishing</h3>
-            <p>Connect a Facebook Page for publishing.</p>
-          </article>
-        </div>
-      </section>
+    </section>
 
-      <section class="content-grid">
-        <article class="panel" id="clips">
+    <section class="content-grid">
+
+      <article class="panel" id="clips">
+        <div class="panel-heading">
           <h2>Recent Activity</h2>
-          <p id="recentActivity">No videos processed yet.</p>
-        </article>
+          <span class="panel-mark">ACTIVITY</span>
+        </div>
+        <p id="recentActivity">No videos processed yet.</p>
+      </article>
 
-        <article class="panel" id="facebook">
+      <article class="panel" id="facebook">
+        <div class="panel-heading">
           <h2>Facebook Connection</h2>
-          <p>Connect your Facebook Page to prepare for publishing.</p>
-          <button class="secondary-button" id="connectFacebook">
-            Connect Facebook
-          </button>
-          <p id="facebookMessage" class="status-message">
-            Facebook is not connected.
-          </p>
-        </article>
-      </section>
+          <span class="panel-mark">ACCOUNT</span>
+        </div>
 
-      <section class="panel lower-panel" id="scheduled">
+        <p>Connect your Facebook Page to prepare for publishing.</p>
+
+        <button class="secondary-button" id="connectFacebook">
+          Connect Facebook
+        </button>
+
+        <p id="facebookMessage" class="status-message">
+          Facebook is not connected.
+        </p>
+      </article>
+
+    </section>
+
+    <section class="panel lower-panel" id="scheduled">
+      <div class="panel-heading">
         <h2>Scheduled Posts</h2>
-        <p id="scheduledMessage">You have no scheduled posts.</p>
-      </section>
+        <span class="panel-mark">PUBLISHING</span>
+      </div>
+      <p id="scheduledMessage">You have no scheduled posts.</p>
+    </section>
 
-      <footer id="help">
-        <p>ClipPilot © 2026</p>
-        <p>Make more from every video.</p>
-      </footer>
+    <footer id="help">
+      <p>ClipPilot © 2026</p>
+      <p>Make more from every video.</p>
+    </footer>
 
-    </main>
-  </div>
+  </main>
 
-  <script src="script.js"></script>
+</div>
+
+<script src="script.js"></script>
+
 </body>
-  </html>
+</html>
